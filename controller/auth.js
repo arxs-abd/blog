@@ -1,6 +1,8 @@
 require('../utils/db')
-const { User } = require('../models/user')
 const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const { User } = require('../models/user')
+
 
 const login = async (req, res) => {
     const {email, password} = req.body
