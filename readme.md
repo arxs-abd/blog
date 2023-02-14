@@ -125,3 +125,79 @@ POST /api/logout
     msg : 'Logout Successfully',
 }
 ```
+
+### B. Blog
+
+#### 1. View All Blog
+
+##### Endpoint
+
+```Javascript
+GET /api/blog
+```
+
+##### Example For Response
+
+```Javascript
+// Response
+200 OK
+{
+    status : 'success',
+    msg : 'Logout Successfully',
+}
+```
+
+#### 2. View Blog By Slug
+
+##### Endpoint
+
+```Javascript
+GET /api/blog/:slug
+```
+
+##### Example For Response
+
+```Javascript
+// Request
+GET /api/blog/cara-membuat-makanan
+// Response
+200 OK
+{
+    "result": {
+        "_id": "63eb84007746fbb54bc0684b",
+        "id_user": "63eb62d520b1564d6ccda22d",
+        "title": "Cara Membuat Makanan",
+        "slug": "cara-membuat-makanan",
+        "content": "Caranya adalah dengan memakan semua makana dengan cara saja",
+        "createdAt": "2023-02-14T12:52:16.127Z",
+        "updatedAt": "2023-02-14T12:52:16.127Z",
+        "__v": 0
+    }
+}
+```
+
+#### 3. Create a Blog
+
+##### Endpoint
+
+```Javascript
+POST /api/blog/
+```
+
+##### Example For Response
+
+```Javascript
+// Request
+{
+    title : 'Cara Membuat Makanan',
+    content : 'Caranya adalah dengan memakan semua makana dengan cara saja',
+}
+// Response
+200 OK
+{
+    {
+    status : 'successfully',
+    msg : 'Blog Added'
+}
+}
+```
