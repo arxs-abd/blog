@@ -11,6 +11,7 @@ const loginValidator = [
         return res.status(400).send(errors)
     }
 ]
+
 const registerValidator = [
     check('email').isEmail().bail().custom( async (value) => {
         const email = await User.find({email : value})
@@ -31,7 +32,25 @@ const registerValidator = [
     }
 ]
 
+const authenticate = (req, res, next) => {
+    const token = req.cookies['x-access-token']
+    if (!token) return res.status(401).send({
+        status : 'error',
+        msg : 'Token Not Found'
+    })
+
+    jwt.verify(token, process.env.ACCESS_TOKEN, (err, result) => {
+        if (err) return res.status(403).send({
+            status : 'error',
+            msg : 'Token Is Wrong'
+        })
+        req.user = result
+        next()
+    })
+}
+
 module.exports = {
     loginValidator,
-    registerValidator
+    registerValidator,
+    authenticate
 }

@@ -1,4 +1,5 @@
 require('../utils/db')
+require('dotenv').config()
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { User } = require('../models/user')
@@ -20,10 +21,18 @@ const login = async (req, res) => {
         status : 'error',
         msg : 'Password is Wrong'
     })
+    const data = {
+        email, 
+        username : user.username
+    }
+
+    const accesToken = jwt.sign(data, process.env.ACCESS_TOKEN)
+    res.cookie('x-access-token', accesToken)
 
     return res.send({
         status : 'success',
-        msg : 'Login Successfully'
+        msg : 'Login Successfully',
+        accesToken
     })
 }
 
@@ -47,7 +56,16 @@ const register = async (req, res) => {
     })
 }
 
+const logout =  async (req, res) => {
+    res.clearCookie('x-access-token')
+    return res.status(200).send({
+        status : 'success',
+        msg : 'Logout Successfull'
+    })
+}
+
 module.exports = {
+    register,
     login,
-    register
+    logout
 }
