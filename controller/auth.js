@@ -22,8 +22,9 @@ const login = async (req, res) => {
         msg : 'Password is Wrong'
     })
     const data = {
+        id : user._id,
+        username : user.username,
         email, 
-        username : user.username
     }
 
     const accesToken = jwt.sign(data, process.env.ACCESS_TOKEN)
