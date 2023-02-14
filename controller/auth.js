@@ -4,8 +4,24 @@ const bcryptjs = require('bcryptjs')
 
 const login = async (req, res) => {
     const {email, password} = req.body
+
+    const user = await User.findOne({
+        email
+    })
+    
+    if (!user) return res.status(403).send({
+        status : 'error',
+        msg : 'Email not Found'
+    })
+
+    if (! await bcryptjs.compare(password, user.password)) return res.status(403).send({
+        status : 'error',
+        msg : 'Password is Wrong'
+    })
+
     return res.send({
-        result : req.body
+        status : 'success',
+        msg : 'Login Successfully'
     })
 }
 
