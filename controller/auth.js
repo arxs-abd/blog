@@ -8,7 +8,7 @@ const login = async (req, res) => {
     const user = await User.findOne({
         email
     })
-    
+
     if (!user) return res.status(403).send({
         status : 'error',
         msg : 'Email not Found'
@@ -26,7 +26,13 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => {
-    const {email, password} = req.body
+    const {email, password, passwordConfirm} = req.body
+
+    if (password !== passwordConfirm) return res.status(403).send({
+        status : 'error',
+        msg : 'Password Confirm is Wrong'
+    })
+
     const username = email.split('@')[0]
     const salt = bcryptjs.genSaltSync(10)
     const newPassword = bcryptjs.hashSync(password, salt)
