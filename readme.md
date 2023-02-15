@@ -184,6 +184,13 @@ GET /api/blog/cara-membuat-makanan
 POST /api/blog/
 ```
 
+##### Field
+
+| Field   | Description                 | Type   | Validation |
+| ------- | --------------------------- | ------ | ---------- |
+| title   | Title for blog in website   | String | Required   |
+| content | Content for blog in website | String | Required   |
+
 ##### Example For Response
 
 ```Javascript
