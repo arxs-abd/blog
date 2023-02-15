@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const routerAuth = require('./routes/auth')
 const routerBlog = require('./routes/blog')
@@ -8,6 +9,9 @@ const routerBlog = require('./routes/blog')
 const app = express()
 const port = 3000
 
+app.use(cors({
+  origin: '*'
+}))
 app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
