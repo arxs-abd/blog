@@ -220,3 +220,68 @@ POST /api/blog/
 }
 }
 ```
+
+#### 4. Update Blog
+
+##### Endpoint
+
+```Javascript
+PUT /api/blog/
+```
+
+##### Field
+
+| Field   | Description                 | Type   | Validation |
+| ------- | --------------------------- | ------ | ---------- |
+| id      | Id for blog in website      | String | Required   |
+| title   | Title for blog in website   | String | Required   |
+| content | Content for blog in website | String | Required   |
+
+##### Example For Response
+
+```Javascript
+// Request
+{
+    title : 'Cara Membuat Makanan Lagi',
+    content : 'Caranya adalah dengan memakan semua makana dengan cara apa saja',
+}
+// Response
+200 OK
+{
+    {
+    status : 'successfully',
+    msg : 'Blog Updated'
+}
+}
+```
+
+#### 5. Remove Blog
+
+##### Endpoint
+
+```Javascript
+DELETE /api/blog/
+```
+
+##### Field
+
+| Field | Description            | Type   | Validation |
+| ----- | ---------------------- | ------ | ---------- |
+| id    | Id for blog in website | String | Required   |
+
+##### Example For Response
+
+```Javascript
+// Request
+{
+    id : '63ebba602bc11162f2ab3d58'
+}
+// Response
+200 OK
+{
+    {
+    status : 'successfully',
+    msg : 'Blog Has Been Deleted'
+}
+}
+```
