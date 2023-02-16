@@ -143,7 +143,19 @@ GET /api/blog
 200 OK
 {
     status : 'success',
-    msg : 'Logout Successfully',
+    msg : 'Successfully Get Blog',
+    data : [
+        {
+            _id : '63eb84007746fbb54bc0684b',
+            id_user : '63eb62d520b1564d6ccda22d',
+            title : 'Cara Membuat Makanan',
+            slug : 'cara-membuat-makanan',
+            content : 'Caranya adalah dengan memakan semua makana dengan cara saja',
+            createdAt : '2023-02-14T12:52:16.127Z',
+            updatedAt : '2023-02-14T12:52:16.127Z',
+            __v : 0
+        }
+    ]
 }
 ```
 
