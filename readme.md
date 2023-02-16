@@ -14,11 +14,11 @@ POST /api/register
 
 ##### Field
 
-| Field            | Description                         | Type   | Validation                         |
-| ---------------- | ----------------------------------- | ------ | ---------------------------------- |
-| email            | The email used to register          | String | Valid email                        |
-| password         | The password used to register       | String | minimum 8 character                |
-| password_confirm | Rewritten password used to register | String | password_confirm equal to password |
+| Field           | Description                         | Type   | Validation                        |
+| --------------- | ----------------------------------- | ------ | --------------------------------- |
+| email           | The email used to register          | String | Valid email                       |
+| password        | The password used to register       | String | minimum 8 character               |
+| passwordConfirm | Rewritten password used to register | String | passwordConfirm equal to password |
 
 ##### Example for Request and Response
 
@@ -27,7 +27,7 @@ POST /api/register
 {
     email : 'arisakhyar704@gmail.com',
     password : 'indonesiainyabesar',
-    password_confirm : 'indonesiainyabesar',
+    passwordConfirm : 'indonesiainyabesar',
 }
 // Response
 200 OK
@@ -39,7 +39,7 @@ POST /api/register
 {
     email : 'arisakhyar704@gmail.com',
     password : 'indonesiainyabesar',
-    password_confirm : 'indonesiainyabesar',
+    passwordConfirm : 'indonesiainyabesar',
 }
 // Response
 401 UNAUTHORIZED
@@ -163,15 +163,15 @@ GET /api/blog/cara-membuat-makanan
 // Response
 200 OK
 {
-    "result": {
-        "_id": "63eb84007746fbb54bc0684b",
-        "id_user": "63eb62d520b1564d6ccda22d",
-        "title": "Cara Membuat Makanan",
-        "slug": "cara-membuat-makanan",
-        "content": "Caranya adalah dengan memakan semua makana dengan cara saja",
-        "createdAt": "2023-02-14T12:52:16.127Z",
-        "updatedAt": "2023-02-14T12:52:16.127Z",
-        "__v": 0
+    result : {
+        _id : '63eb84007746fbb54bc0684b',
+        id_user : '63eb62d520b1564d6ccda22d',
+        title : 'Cara Membuat Makanan',
+        slug : 'cara-membuat-makanan',
+        content : 'Caranya adalah dengan memakan semua makana dengan cara saja',
+        createdAt : '2023-02-14T12:52:16.127Z',
+        updatedAt : '2023-02-14T12:52:16.127Z',
+        __v : 0
     }
 }
 ```

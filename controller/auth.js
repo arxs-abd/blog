@@ -42,7 +42,7 @@ const register = async (req, res) => {
 
     if (password !== passwordConfirm) return res.status(403).send({
         status : 'error',
-        msg : 'Password Confirm is Wrong'
+        msg : 'Password Confirmation is Wrong'
     })
 
     const username = email.split('@')[0]
@@ -53,7 +53,8 @@ const register = async (req, res) => {
     const newUser = new User(data)
     await newUser.save()
     return res.send({
-        result : {...data},
+        status : 'success',
+        msg : 'Signup Successfully'
     })
 }
 
