@@ -44,19 +44,74 @@ const viewBlogBySlug = async (req, res) => {
         status : 'error',
         msg : 'Blog Not Found'
     })
-
+    
     return res.send({
         result : blog
     })
 }
 
-const deleteBlog = (req, res) => {
+const updateBlog = async (req, res) => {
+    const idUser = req.user.id
+    const { id, title, content } = req.body
+    const userBlog = await Blog.findOne({
+        _id : id
+    })
+    
+    if (userBlog.id_user !== idUser) return res.status(403).send({
+        status : 'error',
+        msg : 'Unathorized Author of Blog'
+    })
+
+    const slug = title?.toLowerCase().split(' ').join('-')
+
+    userBlog.title = title ?? userBlog.title
+    userBlog.content = content ?? userBlog.content
+    userBlog.slug = slug ?? userBlog.slug
+
+    await userBlog.save().catch(err => {
+        return res.send({
+            status : 'error',
+            msg : 'Blog Fail to Update'
+        })
+    })
+
+    return res.send({
+        status : 'successfull',
+        msg : 'Blog Has Been Updated'
+    })
+
+}
+
+const deleteBlog = async (req, res) => {
     const {id} = req.body
+    const idUser = req.user.id
+    const blog = await Blog.findOne({
+        _id : id
+    })
+
+    if (blog.id_user !== idUser) return res.status(403).send({
+        status : 'error',
+        msg : 'Unathorized Author of Blog'
+    })
+
+    await blog.remove().catch(err => {
+        return res.send({
+            status : 'error',
+            msg : 'Blog Fail to Remove'
+        })
+    })
+
+    return res.send({
+        status : 'successfull',
+        msg : 'Blog Has Been Deleted'
+    })
     
 }
 
 module.exports = {
     viewAll,
     addBlog,
-    viewBlogBySlug
+    viewBlogBySlug,
+    updateBlog,
+    deleteBlog
 }
