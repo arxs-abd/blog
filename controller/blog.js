@@ -14,6 +14,22 @@ const viewAll = async (req, res) => {
         data : allBlog
     })
 }
+const viewById = async (req, res) => {
+    const allBlog = await Blog.find({
+        id_user : req.user.id
+    }).catch(err => {
+        return res.status(400).send({
+            status : 'error',
+            msg : 'Failed Get Blog',
+            data : err
+        })    
+    })
+    return res.send({
+        status : 'success',
+        msg : 'Successfully Get Blog',
+        data : allBlog
+    })
+}
 
 const addBlog = async (req, res) => {
     const {title, content} = req.body
@@ -110,6 +126,7 @@ const deleteBlog = async (req, res) => {
 
 module.exports = {
     viewAll,
+    viewById,
     addBlog,
     viewBlogBySlug,
     updateBlog,

@@ -4,6 +4,7 @@ const { authenticate } = require('../middleware/auth')
 const router = express.Router()
 
 router.get('/api/blog', viewAll)
+router.get('/api/blogById', authenticate,viewAll)
 router.post('/api/blog', authenticate, addBlog)
 router.get('/api/blog/:slug', viewBlogBySlug)
 router.put('/api/blog', authenticate, updateBlog)
