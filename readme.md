@@ -202,6 +202,7 @@ POST /api/blog/
 | ------- | --------------------------- | ------ | ---------- |
 | title   | Title for blog in website   | String | Required   |
 | content | Content for blog in website | String | Required   |
+| image   | Image for blog in website   | String | Required   |
 
 ##### Example For Response
 
