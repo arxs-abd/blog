@@ -32,9 +32,12 @@ const viewById = async (req, res) => {
 }
 
 const addBlog = async (req, res) => {
+    // return console.log(req.body)
     const {title, content} = req.body
+    const thumbnail = req.file.filename
+    // const image
     const slug = title.toLowerCase().split(' ').join('-')
-    const data = {slug, title, content, id_user : req.user.id}
+    const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
     const newBlog = new Blog(data)
     await newBlog.save().catch(err => {
