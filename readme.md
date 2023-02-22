@@ -198,11 +198,11 @@ POST /api/blog/
 
 ##### Field
 
-| Field   | Description                 | Type   | Validation |
-| ------- | --------------------------- | ------ | ---------- |
-| title   | Title for blog in website   | String | Required   |
-| content | Content for blog in website | String | Required   |
-| image   | Image for blog in website   | String | Required   |
+| Field     | Description                 | Type   | Validation |
+| --------- | --------------------------- | ------ | ---------- |
+| title     | Title for blog in website   | String | Required   |
+| content   | Content for blog in website | String | Required   |
+| thumbnail | Image for blog in website   | String | Required   |
 
 ##### Example For Response
 

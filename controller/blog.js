@@ -1,4 +1,5 @@
 const { Blog } = require("../models/blog")
+const fs = require('fs')
 
 const viewAll = async (req, res) => {
     const allBlog = await Blog.find().catch(err => {
@@ -14,6 +15,7 @@ const viewAll = async (req, res) => {
         data : allBlog
     })
 }
+
 const viewById = async (req, res) => {
     const allBlog = await Blog.find({
         id_user : req.user.id
@@ -32,10 +34,8 @@ const viewById = async (req, res) => {
 }
 
 const addBlog = async (req, res) => {
-    // return console.log(req.body)
     const {title, content} = req.body
     const thumbnail = req.file.filename
-    // const image
     const slug = title.toLowerCase().split(' ').join('-')
     const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
@@ -113,12 +113,21 @@ const deleteBlog = async (req, res) => {
         msg : 'Unathorized Author of Blog'
     })
 
+    fs.unlink(`public/img/${blog.thumbnail}`, async(err) => {
+        if (err) return res.send({
+            status : 'error',
+            msg : 'Blog Fail to Remove'
+        })
+    })
+
     await blog.remove().catch(err => {
         return res.send({
             status : 'error',
             msg : 'Blog Fail to Remove'
         })
     })
+
+
 
     return res.send({
         status : 'successfull',
