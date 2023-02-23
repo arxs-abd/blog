@@ -35,7 +35,7 @@ const viewById = async (req, res) => {
 
 const addBlog = async (req, res) => {
     const {title, content} = req.body
-    const thumbnail = req.file.filename
+    const thumbnail = req?.file?.filename
     const slug = title.toLowerCase().split(' ').join('-')
     const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
@@ -72,6 +72,7 @@ const viewBlogBySlug = async (req, res) => {
 const updateBlog = async (req, res) => {
     const idUser = req.user.id
     const { id, title, content } = req.body
+    const thumbnail = req?.file?.filename
     const userBlog = await Blog.findOne({
         _id : id
     })
@@ -86,6 +87,17 @@ const updateBlog = async (req, res) => {
     userBlog.title = title ?? userBlog.title
     userBlog.content = content ?? userBlog.content
     userBlog.slug = slug ?? userBlog.slug
+
+    if (thumbnail) {
+        fs.unlink(`public/img/${userBlog.thumbnail}`, async (err) => {
+            if (err) return res.send({
+                status : 'error',
+                msg : 'Blog Fail to Update'
+            })
+        })
+
+        userBlog.thumbnail = thumbnail
+    }
 
     await userBlog.save().catch(err => {
         return res.send({
