@@ -23,7 +23,8 @@ const blogSchema = new mongoose.Schema({
         required : true,
     },
 }, {
-    timestamps : true
+    timestamps : true,
+    versionKey : '__v'
 })
 
 const Blog = mongoose.model('Blog', blogSchema)

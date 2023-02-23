@@ -72,7 +72,7 @@ const viewBlogBySlug = async (req, res) => {
 const updateBlog = async (req, res) => {
     const idUser = req.user.id
     const { id, title, content } = req.body
-    const thumbnail = req?.file?.filename
+    const thumbnail = req.file?.filename
     const userBlog = await Blog.findOne({
         _id : id
     })
