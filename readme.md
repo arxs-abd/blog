@@ -232,11 +232,12 @@ PUT /api/blog/
 
 ##### Field
 
-| Field   | Description                 | Type   | Validation |
-| ------- | --------------------------- | ------ | ---------- |
-| id      | Id for blog in website      | String | Required   |
-| title   | Title for blog in website   | String | Required   |
-| content | Content for blog in website | String | Required   |
+| Field     | Description                 | Type   | Validation |
+| --------- | --------------------------- | ------ | ---------- |
+| id        | Id for blog in website      | String | Required   |
+| title     | Title for blog in website   | String | Optional   |
+| content   | Content for blog in website | String | Optional   |
+| thumbnail | Image for blog in website   | Image  | Optional   |
 
 ##### Example For Response
 
