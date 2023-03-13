@@ -159,6 +159,37 @@ GET /api/blog
 }
 ```
 
+#### 2. View Blog By User Id
+
+##### Endpoint
+
+```Javascript
+GET /api/blog/userId
+```
+
+##### Example For Response
+
+```Javascript
+// Request
+{
+    idUser : '63eb62d520b1564d6ccda22d'
+}
+// Response
+200 OK
+{
+    result : {
+        _id : '63eb84007746fbb54bc0684b',
+        id_user : '63eb62d520b1564d6ccda22d',
+        title : 'Cara Membuat Makanan',
+        slug : 'cara-membuat-makanan',
+        content : 'Caranya adalah dengan memakan semua makana dengan cara saja',
+        createdAt : '2023-02-14T12:52:16.127Z',
+        updatedAt : '2023-02-14T12:52:16.127Z',
+        __v : 0
+    }
+}
+```
+
 #### 2. View Blog By Slug
 
 ##### Endpoint
