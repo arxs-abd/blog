@@ -1,10 +1,11 @@
 const express = require('express')
-const { viewAll, addBlog, viewBlogBySlug, updateBlog, deleteBlog } = require('../controller/blog')
+const { viewAll, addBlog, viewBlogBySlug, updateBlog, deleteBlog, viewById } = require('../controller/blog')
 const { authenticate } = require('../middleware/auth')
 const router = express.Router()
 const upload = require('../config/upload')
 
 router.get('/api/blog', viewAll)
+router.get('/api/blog/userId', authenticate, viewById)
 router.get('/api/blogById', authenticate,viewAll)
 router.post('/api/blog', authenticate, addBlog)
 router.get('/api/blog/:slug', viewBlogBySlug)
