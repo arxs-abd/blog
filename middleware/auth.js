@@ -33,7 +33,7 @@ const registerValidator = [
 ]
 
 const authenticate = (req, res, next) => {
-    const token = req.cookies['x-access-token']
+    const token = req.cookies['x-access-token'] ?? req.body.token
     if (!token) return res.status(401).send({
         status : 'error',
         msg : 'Token Not Found'
