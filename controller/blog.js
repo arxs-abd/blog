@@ -34,8 +34,7 @@ const viewById = async (req, res) => {
 }
 
 const addBlog = async (req, res) => {
-    const {title, content} = req.body
-    const thumbnail = req?.file?.filename
+    const {title, content, thumbnail} = req.body
     const slug = title.toLowerCase().split(' ').join('-')
     const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
@@ -71,8 +70,7 @@ const viewBlogBySlug = async (req, res) => {
 
 const updateBlog = async (req, res) => {
     const idUser = req.user.id
-    const { id, title, content } = req.body
-    const thumbnail = req.file?.filename
+    const { id, title, content, thumbnail } = req.body
     const userBlog = await Blog.findOne({
         _id : id
     })
@@ -87,17 +85,7 @@ const updateBlog = async (req, res) => {
     userBlog.title = title ?? userBlog.title
     userBlog.content = content ?? userBlog.content
     userBlog.slug = slug ?? userBlog.slug
-
-    if (thumbnail) {
-        fs.unlink(`public/img/${userBlog.thumbnail}`, async (err) => {
-            if (err) return res.send({
-                status : 'error',
-                msg : 'Blog Fail to Update'
-            })
-        })
-
-        userBlog.thumbnail = thumbnail
-    }
+    userBlog.thumbnail = thumbnail ?? userBlog.thumbnail
 
     await userBlog.save().catch(err => {
         return res.send({
@@ -125,21 +113,12 @@ const deleteBlog = async (req, res) => {
         msg : 'Unathorized Author of Blog'
     })
 
-    fs.unlink(`public/img/${blog.thumbnail}`, async(err) => {
-        if (err) return res.send({
-            status : 'error',
-            msg : 'Blog Fail to Remove'
-        })
-    })
-
     await blog.remove().catch(err => {
         return res.send({
             status : 'error',
             msg : 'Blog Fail to Remove'
         })
     })
-
-
 
     return res.send({
         status : 'successfull',
