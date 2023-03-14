@@ -35,7 +35,7 @@ const viewById = async (req, res) => {
 
 const addBlog = async (req, res) => {
     const {title, content, thumbnail} = req.body
-    const slug = title.toLowerCase().split(' ').join('-')
+    const slug = encodeURIComponent(title.toLowerCase())
     const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
     const newBlog = new Blog(data)
@@ -80,7 +80,7 @@ const updateBlog = async (req, res) => {
         msg : 'Unathorized Author of Blog'
     })
 
-    const slug = title?.toLowerCase().split(' ').join('-')
+    const slug = encodeURIComponent(title?.toLowerCase())
 
     userBlog.title = title ?? userBlog.title
     userBlog.content = content ?? userBlog.content
