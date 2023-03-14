@@ -1,6 +1,6 @@
 const { Blog } = require("../models/blog")
 const fs = require('fs')
-const slug = require('slug')
+const xslug = require('slug')
 
 const viewAll = async (req, res) => {
     const allBlog = await Blog.find().catch(err => {
@@ -36,7 +36,7 @@ const viewById = async (req, res) => {
 
 const addBlog = async (req, res) => {
     const {title, content, thumbnail} = req.body
-    const slug = slug(title.toLowerCase())
+    const slug = xslug(title.toLowerCase())
     const data = {slug, title, content, id_user : req.user.id, thumbnail}
 
     const newBlog = new Blog(data)
@@ -81,7 +81,7 @@ const updateBlog = async (req, res) => {
         msg : 'Unathorized Author of Blog'
     })
 
-    const slug = slug(title?.toLowerCase())
+    const slug = xslug(title?.toLowerCase())
 
     userBlog.title = title ?? userBlog.title
     userBlog.content = content ?? userBlog.content
