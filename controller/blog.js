@@ -17,6 +17,25 @@ const viewAll = async (req, res) => {
     })
 }
 
+const viewByCategory = async (req, res) => {
+    const {category} = req.params
+    
+    const allBlog = await Blog.find({
+        category
+    }).catch(err => {
+        return res.status(400).send({
+            status : 'error',
+            msg : 'Failed Get Blog',
+            data : err
+        })    
+    })
+
+    return res.send({
+        status : 'success',
+        allBlog
+    })
+}
+
 const viewById = async (req, res) => {
     const allBlog = await Blog.find({
         id_user : req.user.id
@@ -37,7 +56,7 @@ const viewById = async (req, res) => {
 const addBlog = async (req, res) => {
     const {title, content, thumbnail} = req.body
     const slug = xslug(title.toLowerCase())
-    const data = {slug, title, content, id_user : req.user.id, thumbnail}
+    const data = {slug, title, content, id_user : req.user.id, thumbnail, category}
 
     const newBlog = new Blog(data)
     await newBlog.save().catch(err => {
@@ -71,7 +90,7 @@ const viewBlogBySlug = async (req, res) => {
 
 const updateBlog = async (req, res) => {
     const idUser = req.user.id
-    const { id, title, content, thumbnail } = req.body
+    const { id, title, content, thumbnail, category } = req.body
     const userBlog = await Blog.findOne({
         _id : id
     })
@@ -87,6 +106,7 @@ const updateBlog = async (req, res) => {
     userBlog.content = content ?? userBlog.content
     userBlog.slug = slug ?? userBlog.slug
     userBlog.thumbnail = thumbnail ?? userBlog.thumbnail
+    userBlog.category = category ?? userBlog.category
 
     await userBlog.save().catch(err => {
         return res.send({
@@ -134,5 +154,6 @@ module.exports = {
     addBlog,
     viewBlogBySlug,
     updateBlog,
-    deleteBlog
+    deleteBlog,
+    viewByCategory
 }
