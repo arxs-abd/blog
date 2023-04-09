@@ -27,13 +27,13 @@ const login = async (req, res) => {
         email, 
     }
 
-    const accesToken = jwt.sign(data, process.env.ACCESS_TOKEN)
-    res.cookie('x-access-token', accesToken)
+    const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN)
+    res.cookie('x-access-token', accessToken)
 
     return res.send({
         status : 'success',
         msg : 'Login Successfully',
-        accesToken
+        accessToken
     })
 }
 
